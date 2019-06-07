@@ -1,0 +1,22 @@
+apiVersion: kubevirt.io/v1alpha3
+kind: VirtualMachineInstance
+metadata:
+  name: cirros
+  labels:
+      special: vmi-migratable
+spec:
+  domain:
+    cpu:
+        model: Conroe
+    resources:
+      requests:
+        memory: 64M
+    devices:
+      disks:
+      - name: cirros-disk
+        disk:
+            bus: virtio
+  volumes:
+    - name: cirros-disk 
+      persistentVolumeClaim:
+        claimName: cirros-datavol
